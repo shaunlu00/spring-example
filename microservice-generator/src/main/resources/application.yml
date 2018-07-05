@@ -1,0 +1,4 @@
+spring:
+  #freemarker:
+    #charset: UTF-8
+    #templateLoaderPath: "classpath:/templates"

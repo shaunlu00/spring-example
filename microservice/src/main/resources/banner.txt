@@ -1,0 +1,7 @@
+${AnsiColor.GREEN} '||'  '||' '||'   ${AnsiColor.RED}   .|'''.|  '||''|.      |       ..|'''.| '||''''|
+${AnsiColor.GREEN}  ||    ||   ||    ${AnsiColor.RED}   ||..  '   ||   ||    |||    .|'     '   ||  .
+${AnsiColor.GREEN}  ||''''||   ||    ${AnsiColor.RED}    ''|||.   ||...|'   |  ||   ||          ||''|
+${AnsiColor.GREEN}  ||    ||   ||    ${AnsiColor.RED}  .     '||  ||       .''''|.  '|.      .  ||
+${AnsiColor.GREEN} .||.  .||. .||.   ${AnsiColor.RED}  |'....|'  .||.     .|.  .||.  ''|....'  .||.....|
+
+${AnsiColor.BRIGHT_BLUE}:: web app example  :: Running Spring Boot ${spring-boot.version} ::
