@@ -1,6 +1,7 @@
 package com.shaunlu.springexample.service;
 
 import com.shaunlu.springexample.model.a.User;
+import com.shaunlu.springexample.model.b.AppPermission;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,26 @@ public class ProgrammaticTransctionService {
             user = results.get(0);
         }
         return user;
+    }
+
+    public void createUserAndPermission(String userName, String email, String operation, Boolean isAllowed) {
+        User user = new User(userName, email);
+        AppPermission permission = new AppPermission(userName, operation, isAllowed);
+        EntityManager aEm = aEmf.createEntityManager();
+        EntityTransaction aTransaction = aEm.getTransaction();
+        EntityManager bEm = bEmf.createEntityManager();
+        EntityTransaction bTransaction = bEm.getTransaction();
+        try {
+            aTransaction.begin();
+            bTransaction.begin();
+            aEm.persist(user);
+            bEm.persist(permission);
+            aTransaction.commit();
+            bTransaction.commit();
+        } catch (Exception e) {
+            logger.error("create user and permission error", e);
+            aTransaction.rollback();
+            bTransaction.rollback();
+        }
     }
 }

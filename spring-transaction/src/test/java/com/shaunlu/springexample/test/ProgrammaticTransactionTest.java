@@ -33,7 +33,19 @@ public class ProgrammaticTransactionTest {
 
     @Test
     public void test_createUserWithException(){
-        transctionService.createNewUserWithException("Steven", "steven@example.com");
+        transctionService.createNewUserWithException("Steve", "steve@example.com");
         assertNull(transctionService.findUserByName("Steven"));
+    }
+
+    @Test
+    public void test_createUserAndPermission() {
+        transctionService.createUserAndPermission("Badman", "badman@example", "read", true);
+        assertNotNull(transctionService.findUserByName("Badman"));
+    }
+
+    @Test
+    public void test_createUserAndPermissionWithException() {
+        transctionService.createUserAndPermission("Superman", "superman@example", null, true);
+        assertNull(transctionService.findUserByName("Superman"));
     }
 }
