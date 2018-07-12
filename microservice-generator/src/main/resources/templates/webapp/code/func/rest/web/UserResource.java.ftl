@@ -2,6 +2,7 @@ package ${package}.rest.web;
 
 import ${package}.domain.User;
 import ${package}.service.UserRoleService;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,6 @@ public class UserResource {
     @PostMapping(value = "/findall", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> findAll(@RequestParam("size") int size, @RequestParam("page") int page) {
         Page<User> users = userRoleService.findAll(PageRequest.of(page, size));
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }

@@ -7,12 +7,16 @@ public class ApplicationProperties {
 
     private final ApplicationProperties.Mail mail = new ApplicationProperties.Mail();
 
+    private final ApplicationProperties.JWT jwt = new ApplicationProperties.JWT();
+
     public ApplicationProperties() {
     }
 
     public Mail getMail() {
         return this.mail;
     }
+
+    public JWT getJwt() {return  this.jwt; }
 
     public static class Mail {
         private String host = "";
@@ -22,8 +26,7 @@ public class ApplicationProperties {
         private String auth_user_name = "";
         private String auth_password = "";
 
-        public Mail() {
-        }
+        public Mail() { }
 
         public String getHost() {
             return host;
@@ -71,6 +74,30 @@ public class ApplicationProperties {
 
         public void setAuth_password(String auth_password) {
             this.auth_password = auth_password;
+        }
+    }
+
+    public static class JWT {
+        public JWT() { }
+
+        private String secret_key = "";
+
+        private int token_validity_in_seconds = 0;
+
+        public String getSecret_key() {
+            return secret_key;
+        }
+
+        public void setSecret_key(String secret_key) {
+            this.secret_key = secret_key;
+        }
+
+        public int getToken_validity_in_seconds() {
+            return token_validity_in_seconds;
+        }
+
+        public void setToken_validity_in_seconds(int token_validity_in_seconds) {
+            this.token_validity_in_seconds = token_validity_in_seconds;
         }
     }
 }

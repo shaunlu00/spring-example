@@ -1,8 +1,6 @@
 package com.shaunlu.springexample.microservice.config;
 
-import com.shaunlu.springexample.microservice.rest.security.AuthoritiesConstants;
 import com.shaunlu.springexample.microservice.rest.security.CustomSecurityConfigurer;
-import com.shaunlu.springexample.microservice.rest.security.JWTFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -25,7 +23,7 @@ public class MicroserviceSecurityConfiguration extends WebSecurityConfigurerAdap
 
     private final SecurityProblemSupport problemSupport;
 
-    private CustomSecurityConfigurer customSecurityConfigurer;
+    private final CustomSecurityConfigurer customSecurityConfigurer;
 
     public MicroserviceSecurityConfiguration(SecurityProblemSupport problemSupport, CustomSecurityConfigurer customSecurityConfigurer) {
         this.problemSupport = problemSupport;
@@ -64,16 +62,11 @@ public class MicroserviceSecurityConfiguration extends WebSecurityConfigurerAdap
                 .authorizeRequests()
                 .antMatchers("/**/web-api/**").authenticated()
                 .antMatchers("/**/mobile-api/**").authenticated()
-                .antMatchers("/**/management/health").permitAll()
-                .antMatchers("/**/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/**/swagger-ui.html").permitAll()
+                .antMatchers("/**/auth/login").permitAll()
                 .and()
                 .apply(customSecurityConfigurer);
     }
-
-//    private CustomSecurityConfigurer securityConfigurerAdapter() {
-//        return new CustomSecurityConfigurer();
-//    }
 
     @Bean
     public SecurityEvaluationContextExtension securityEvaluationContextExtension() {

@@ -53,4 +53,7 @@ application:
         auth_password: admin
         sender_address: test@example.com
         encode: UTF-8
+    jwt:
+        secret_key: a9jgu#;asu!iasdl1js
+        token_validity_in_seconds: 3600
 

@@ -56,7 +56,7 @@ public class SourceGenerator {
         compileTemplateFile(testFolder);
 
         // test resource
-        String templateTestResourcePath = appConfig.getRootPath() + File.separator + "templates" + File.separator + "webapp" + File.separator + "resource" + File.separator + "func";
+        String templateTestResourcePath = appConfig.getRootPath() + File.separator + "templates" + File.separator + "webapp" + File.separator + "resource" + File.separator + "test";
         FileUtils.copyFile(templateTestResourcePath, testResourceFolder.getAbsolutePath());
         compileTemplateFile(testResourceFolder);
 

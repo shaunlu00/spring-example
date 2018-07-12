@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
-public class UserResourceTests {
+public class AuthResourceTest {
     private MockMvc mvc;
 
     @Autowired
@@ -29,18 +29,27 @@ public class UserResourceTests {
 
     @Before
     public void setup() {
-        mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-//                .addFilter(new JWTFilter())
-                .build();
+        mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
     @Test
-    public void testFindAllUsers() throws Exception {
+    public void testLogin() throws Exception {
         ResultActions resultActions = mvc.perform(
-                post("/web-api/user/findall?size=5&page=0")
-                        .header("abc", "abc")
+                post("/web-api/auth/login")
+                        .param("user_name","peter")
+                        .param("password", "peter")
                         .contentType(MediaType.APPLICATION_JSON));
         resultActions.andExpect(status().isOk());
-        System.out.println(resultActions.andReturn().getResponse().getContentAsString());
+        System.out.println("access_token:" + resultActions.andReturn().getResponse().getContentAsString());
+    }
+
+    @Test
+    public void testLoginWithException() throws Exception {
+        ResultActions resultActions = mvc.perform(
+                post("/web-api/auth/login")
+                        .param("user_name","peter")
+                        .param("password", "peter1")
+                        .contentType(MediaType.APPLICATION_JSON));
+        resultActions.andExpect(status().isUnauthorized());
     }
 }

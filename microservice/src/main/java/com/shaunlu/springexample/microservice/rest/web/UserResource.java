@@ -25,6 +25,6 @@ public class UserResource {
     @PostMapping(value = "/findall", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> findAll(@RequestParam("size") int size, @RequestParam("page") int page) {
         Page<User> users = userRoleService.findAll(PageRequest.of(page, size));
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }

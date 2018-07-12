@@ -43,6 +43,7 @@ server:
     port: 8080
 
 
+
 application:
     mail:
         host: 127.0.0.1
@@ -51,4 +52,7 @@ application:
         auth_password: admin
         sender_address: test@example.com
         encode: UTF-8
+    jwt:
+        secret_key: a9jgu#;asu!iasdl1js
+        token_validity_in_seconds: 3600
 

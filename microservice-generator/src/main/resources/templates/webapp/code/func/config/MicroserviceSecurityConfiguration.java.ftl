@@ -1,6 +1,5 @@
 package ${package}.config;
 
-import ${package}.rest.security.AuthoritiesConstants;
 import ${package}.rest.security.CustomSecurityConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,14 +62,12 @@ public class MicroserviceSecurityConfiguration extends WebSecurityConfigurerAdap
                 .authorizeRequests()
                 .antMatchers("/**/web-api/**").authenticated()
                 .antMatchers("/**/mobile-api/**").authenticated()
-                .antMatchers("/**/management/health").permitAll()
-                .antMatchers("/**/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/**/swagger-ui.html").permitAll()
+                .antMatchers("/**/auth/login").permitAll()
                 .and()
                 .apply(customSecurityConfigurer);
     }
 
-    
     @Bean
     public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
         return new SecurityEvaluationContextExtension();

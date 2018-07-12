@@ -1,5 +1,6 @@
 package ${package}.test.rest.web;
 
+
 import ${package}.Application;
 import ${package}.rest.security.JWTFilter;
 import org.junit.Before;
@@ -21,23 +22,37 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 @WebAppConfiguration
-public class UserResourceTests {
+public class UserResourceTest {
     private MockMvc mvc;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
 
+    @Autowired
+    private JWTFilter jwtFilter;
+
+
+    private String access_token;
+
     @Before
-    public void setup() {
+    public void setup() throws Exception {
         mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                .addFilter(jwtFilter)
                 .build();
+
+        ResultActions resultActions = mvc.perform(
+                post("/web-api/auth/login")
+                        .param("user_name","peter")
+                        .param("password", "peter")
+                        .contentType(MediaType.APPLICATION_JSON));
+        String token = resultActions.andReturn().getResponse().getContentAsString();
     }
 
     @Test
     public void testFindAllUsers() throws Exception {
         ResultActions resultActions = mvc.perform(
                 post("/web-api/user/findall?size=5&page=0")
-                        .header("abc", "abc")
+                        .header(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + this.access_token)
                         .contentType(MediaType.APPLICATION_JSON));
         resultActions.andExpect(status().isOk());
         System.out.println(resultActions.andReturn().getResponse().getContentAsString());
