@@ -23,7 +23,7 @@
     <properties>
         <jdk.version>1.8.0_101</jdk.version>
         <spring.version>5.0.1.RELEASE</spring.version>
-        <spring-data-jpa.version>2.0.1.RELEASE</spring-data-jpa.version>
+        <spring-data-jpa.version>2.1.0.RELEASE</spring-data-jpa.version>
         <spring-security.version>5.0.0.RELEASE</spring-security.version>
         <servlet.version>4.0.0</servlet.version>
         <junit.version>4.12</junit.version>
